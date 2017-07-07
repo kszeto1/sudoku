@@ -67,44 +67,29 @@ correct2 = [[1,2,3,4],
 def check_sudoku(list):
     columnList = []
     index = len(list)
-    rowCount = 0
+    rowCount = 0 #rowCount and columnCount moves the loop along
     columnCount = 0
     while rowCount <= index and columnCount <= index:
         for row in list:
             for number in row:
-                columnList.append(list[rowCount][columnCount])
+                columnList.append(list[rowCount][columnCount]) #columnList created by storing values from row
                 rowCount += 1
-                if columnList == row and len(columnList) == index:
+                if columnList == row and len(columnList) == index: #if column and row match, then loop breaks and moves to next row and column
                     columnCount += 1
                     rowCount = 0
                     columnList = []
                     break
-                if columnList != row and len(columnList) == index:
+                if columnList != row and len(columnList) == index: #if column doesn't match row, then procedure ends and returns false
                     return False
-                if str(number).isalpha() or number != int(number):
+                if str(number).isalpha() or number != int(number): #tests if numbers in row are integers or a string
                     return False
-                if row.count(number) > 1:
+                if row.count(number) > 1: #tests if there are duplicates in any rows
                     return False
-                if number + 1 not in row and number + 1 <= index:
+                if number + 1 not in row and number + 1 <= index: #tests if missing number in sequence
                     return False
         return True
 
 
-
-# def check_sudoku(p):
-#     digit = 1
-#     length = len(p)
-#     for row in p:
-#         while digit <= length:
-#             occurs = row.count(digit)
-#             if occurs == 1:
-#                 print "occurs:" + str(occurs)
-#                 print "digits:" + str(digit)
-#                 digit += 1
-#             if occurs != 1:
-#                 print occurs
-#                 return False
-#         return True
 
 # print check_sudoku(incorrect)
 #>>> False
@@ -127,5 +112,5 @@ def check_sudoku(list):
 # print check_sudoku(correct2)
 #>>> True
 
-print check_sudoku(incorrect6)
+# print check_sudoku(incorrect6)
 #>>> True
