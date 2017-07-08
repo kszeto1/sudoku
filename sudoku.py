@@ -72,6 +72,12 @@ def check_sudoku(list):
     while rowCount <= index and columnCount <= index:
         for row in list:
             for number in row:
+                if str(number).isalpha() or number != int(number): #tests if numbers in row are integers or a string
+                    return False
+                if row.count(number) > 1: #tests if there are duplicates in any rows
+                    return False
+                if number + 1 not in row and number + 1 <= index:  # tests if missing number in sequence
+                    return False
                 columnList.append(list[rowCount][columnCount]) #columnList created by storing values from row
                 rowCount += 1
                 if columnList == row and len(columnList) == index: #if column and row match, then loop breaks and moves to next row and column
@@ -81,17 +87,14 @@ def check_sudoku(list):
                     break
                 if columnList != row and len(columnList) == index: #if column doesn't match row, then procedure ends and returns false
                     return False
-                if str(number).isalpha() or number != int(number): #tests if numbers in row are integers or a string
-                    return False
-                if row.count(number) > 1: #tests if there are duplicates in any rows
-                    return False
-                if number + 1 not in row and number + 1 <= index: #tests if missing number in sequence
-                    return False
+
+
+
         return True
 
 
 
-# print check_sudoku(incorrect)
+print check_sudoku(incorrect)
 #>>> False
 
 # print check_sudoku(correct)
